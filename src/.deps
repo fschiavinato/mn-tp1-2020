@@ -1,0 +1,12 @@
+{
+    ".deps_version": 2,
+    "g++ -o ./tp ./cmm.o": {
+        "cmm.o": "input-aede1a07362d24403392369e196d988c",
+        "tp": "input-882e274b9b2acf0d66acbc3cfa2e3946"
+    },
+    "g++ -std=c++11 -O2 -c ./cmm.cpp -o ./cmm.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d",
+        "cmm.cpp": "input-04b8ebdb9a4b9e3263dc1556576dfa9c",
+        "cmm.o": "input-aede1a07362d24403392369e196d988c"
+    }
+}
