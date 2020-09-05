@@ -11,11 +11,11 @@ def build():
 
 def compile():
   for source in sources:
-    run(compiler, '-std=c++11', '-O2', '-c', source+'.cpp', '-o', source+'.o')
+    run(compiler, '-std=c++11', '-g', '-O0', '-c', source+'.cpp', '-o', source+'.o')
 
 def link():
   objects = [s+'.o' for s in sources]
-  run(compiler, '-o', executable, objects)
+  run(compiler, '-g', '-o', executable, objects)
 
 def clean():
   autoclean()

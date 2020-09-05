@@ -1,12 +1,26 @@
 {
     ".deps_version": 2,
+    "g++ -g -o ./tp ./cmm.o": {
+        "cmm.o": "input-a51c019fd243543f5ec649f88b2bbe3e",
+        "tp": "input-0fa195f89b6b2c52c942aebad061d6d2"
+    },
     "g++ -o ./tp ./cmm.o": {
-        "cmm.o": "input-aede1a07362d24403392369e196d988c",
-        "tp": "input-882e274b9b2acf0d66acbc3cfa2e3946"
+        "cmm.o": "input-f0a7b38d9c1a2ca162d0cc5626dd814e",
+        "tp": "input-a8daff891fc3ec4efde4f631b156f579"
     },
     "g++ -std=c++11 -O2 -c ./cmm.cpp -o ./cmm.o": {
         ".": "input-5058f1af8388633f609cadb75a75dc9d",
         "cmm.cpp": "input-04b8ebdb9a4b9e3263dc1556576dfa9c",
         "cmm.o": "input-aede1a07362d24403392369e196d988c"
+    },
+    "g++ -std=c++11 -g -O0 -c ./cmm.cpp -o ./cmm.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d",
+        "cmm.cpp": "input-b239e61e8b83c45fa9f172df574bd19f",
+        "cmm.o": "input-a51c019fd243543f5ec649f88b2bbe3e"
+    },
+    "g++ -std=c++11 -g -O2 -c ./cmm.cpp -o ./cmm.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d",
+        "cmm.cpp": "input-7b6a514b8ba6cb1df7ecd262f9b6f1b8",
+        "cmm.o": "input-3c6201d89016e45374e5699d86b41716"
     }
 }
