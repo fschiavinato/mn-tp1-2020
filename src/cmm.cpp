@@ -1,10 +1,13 @@
 #include<iostream>
 #include<vector>
+#include<ostream>
 
 #define forn(i,n) for(int i=0;i<int(n);i++)
 #define dforn(i,n) for(int i=int(n)-1;i>=0;i--)
 #define forsn(i,s,n) for(int i=int(s);i<int(n);i++)
 #define dforsn(i,s,n) for(int i=int(n)-1;i>=int(s);i--)
+
+#define debug(x) cerr << #x << ":" << endl << x << endl
 
 using namespace std;
 
@@ -30,6 +33,19 @@ class matriz {
 
         T* const operator[](int i) {
             return this->entradas[i];
+        }
+
+        friend ostream& operator<<(ostream& out, matriz<T>& A) {
+            out << "{";
+            forn(i, A.n) {
+                out << "{";
+                forn(j, A.m) {
+                    out << A[i][j] << (j < A.m-1? "; ": "");
+                }
+                out << "}" << (i < A.n-1? "; ": "") << endl;
+            }
+            out << "}";
+            return out;
         }
 };
 
@@ -78,7 +94,8 @@ vector<float> cmm(vector<int>& w, vector<int>& l, matriz<int>& n, const int T) {
     return eg(C, b, T);
 }
 
-vector<float> eg(matriz<float>& C, vector<float>& b, const int T) {
+vector<float> eg(matriz<float>& C, vector <float>& b, const int T) {
+    debug(C);
     vector<float> x(T);
     forn(i, T) {
         forsn(k, i+1, T) {
@@ -88,6 +105,7 @@ vector<float> eg(matriz<float>& C, vector<float>& b, const int T) {
             }
         }
     }
+    debug(C);
     dforn(i, T) {
         x[i] = b[i];
         dforsn(j, i+1, T) {
