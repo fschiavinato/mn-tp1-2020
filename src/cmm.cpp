@@ -7,7 +7,8 @@
 #define forsn(i,s,n) for(int i=int(s);i<int(n);i++)
 #define dforsn(i,s,n) for(int i=int(n)-1;i>=int(s);i--)
 
-#define debug(x) cerr << #x << ":" << endl << x << endl
+#define debug(x) cerr << __LINE__  << ") " << #x << " = " << x << endl
+#define RAYA cerr << "===============================" << endl
 
 using namespace std;
 
@@ -35,28 +36,42 @@ class matriz {
             return this->entradas[i];
         }
 
-        friend ostream& operator<<(ostream& out, matriz<T>& A) {
-            out << "{";
-            forn(i, A.n) {
-                out << "{";
-                forn(j, A.m) {
-                    out << A[i][j] << (j < A.m-1? "; ": "");
+        friend ostream& operator<<(ostream& out, matriz<T>& v) {
+            out << "[";
+            forn(i, v.n) {
+                out << endl << "[";
+                forn(j, v.m) {
+                    out << v[i][j] << (j < v.m-1? ", ": "");
                 }
-                out << "}" << (i < A.n-1? "; ": "") << endl;
+                out << "]" << (i < v.n-1? ", ": "");
             }
-            out << "}";
+            out << "]";
             return out;
         }
 };
 
-vector<float> cmm(vector<int>& w, vector<int>& l, matriz<int>& n, const int T);
-vector<float> eg(matriz<float>& C, vector<float>& b, const int T);
+template<class T>
+class vect: public std::vector<T> {
+    public:
+    vect(const int& n): std::vector<T>(n) {}
+    friend ostream& operator<<(ostream& out, vect<T>& A) {
+        out << "[";
+        forn(i, A.size()) {
+            out << A[i] << (i < A.size()-1? ", ": "");
+        }
+        out << "]";
+        return out;
+    }
+};
+
+vect<float> cmm(vect<float>& w, vect<float>& l, matriz<float>& n, const int T);
+vect<float> eg(matriz<float>& C, vect<float>& b, const int T);
 
 int main() {
     int T, P;
     cin >> T >> P;
-    vector<int> w(T), l(T);
-    matriz<int> n(T,T);
+    vect<float> w(T), l(T);
+    matriz<float> n(T,T);
     int fecha, equipo1, equipo2, goles1, goles2;
     forn(i, P) {
         cin >> fecha >> equipo1 >> goles1 >> equipo2 >> goles2;
@@ -71,15 +86,15 @@ int main() {
         n[equipo1-1][equipo2-1]++;
         n[equipo2-1][equipo1-1]++;
     }
-    vector<float> r = cmm(w, l, n, T);
+    vect<float> r = cmm(w, l, n, T);
     forn(i, T) {
         cout << r[i] << endl;
     }
 }
 
-vector<float> cmm(vector<int>& w, vector<int>& l, matriz<int>& n, const int T) {
+vect<float> cmm(vect<float>& w, vect<float>& l, matriz<float>& n, const int T) {
     matriz<float> C(T,T);
-    vector<float> b(T);
+    vect<float> b(T);
     forn(i, T) {
         b[i] = 1 + (w[i] - l[i]) / 2;
         forn(j, T) {
@@ -94,18 +109,27 @@ vector<float> cmm(vector<int>& w, vector<int>& l, matriz<int>& n, const int T) {
     return eg(C, b, T);
 }
 
-vector<float> eg(matriz<float>& C, vector <float>& b, const int T) {
+vect<float> eg(matriz<float>& C, vect <float>& b, const int T) {
+    vect<float> x(T);
     debug(C);
-    vector<float> x(T);
+    debug(b);
     forn(i, T) {
         forsn(k, i+1, T) {
+            float alpha = C[k][i] / C[i][i];
+            debug(k);
+            debug(alpha);
             forsn(j, i, T) {
-                C[k][j] -= C[i][j] * C[k][i] / C[i][i];
-                b[k] -= b[i] * C[k][i] / C[i][i];
+                C[k][j] -= C[i][j] * alpha;
+                b[k] -= b[i] * alpha;
             }
+            debug(C);
+            debug(b);
+            RAYA;
         }
     }
+    RAYA;
     debug(C);
+    debug(b);
     dforn(i, T) {
         x[i] = b[i];
         dforsn(j, i+1, T) {
