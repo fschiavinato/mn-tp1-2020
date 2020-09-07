@@ -64,14 +64,14 @@ class vect: public std::vector<T> {
     }
 };
 
-vect<float> cmm(vect<float>& w, vect<float>& l, matriz<float>& n, const int T);
-vect<float> eg(matriz<float>& C, vect<float>& b, const int T);
+vect<double> cmm(vect<double>& w, vect<double>& l, matriz<double>& n, const int T);
+vect<double> eg(matriz<double>& C, vect<double>& b, const int T);
 
 int main() {
     int T, P;
     cin >> T >> P;
-    vect<float> w(T), l(T);
-    matriz<float> n(T,T);
+    vect<double> w(T), l(T);
+    matriz<double> n(T, T);
     int fecha, equipo1, equipo2, goles1, goles2;
     forn(i, P) {
         cin >> fecha >> equipo1 >> goles1 >> equipo2 >> goles2;
@@ -86,15 +86,15 @@ int main() {
         n[equipo1-1][equipo2-1]++;
         n[equipo2-1][equipo1-1]++;
     }
-    vect<float> r = cmm(w, l, n, T);
+    vect<double> r = cmm(w, l, n, T);
     forn(i, T) {
         cout << r[i] << endl;
     }
 }
 
-vect<float> cmm(vect<float>& w, vect<float>& l, matriz<float>& n, const int T) {
-    matriz<float> C(T,T);
-    vect<float> b(T);
+vect<double> cmm(vect<double>& w, vect<double>& l, matriz<double>& n, const int T) {
+    matriz<double> C(T,T);
+    vect<double> b(T);
     forn(i, T) {
         b[i] = 1 + (w[i] - l[i]) / 2;
         forn(j, T) {
@@ -109,23 +109,25 @@ vect<float> cmm(vect<float>& w, vect<float>& l, matriz<float>& n, const int T) {
     return eg(C, b, T);
 }
 
-vect<float> eg(matriz<float>& C, vect <float>& b, const int T) {
-    vect<float> x(T);
+vect<double> eg(matriz<double>& C, vect <double>& b, const int T) {
+    vect<double> x(T);
     debug(C);
     debug(b);
     forn(i, T) {
+        debug(i);
         forsn(k, i+1, T) {
-            float alpha = C[k][i] / C[i][i];
+            double alpha = C[k][i] / C[i][i];
             debug(k);
             debug(alpha);
             forsn(j, i, T) {
                 C[k][j] -= C[i][j] * alpha;
-                b[k] -= b[i] * alpha;
             }
+            b[k] -= b[i] * alpha;
             debug(C);
             debug(b);
             RAYA;
         }
+        RAYA;
     }
     RAYA;
     debug(C);
