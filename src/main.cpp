@@ -1,4 +1,3 @@
-
 #include<iostream>
 #include"cmm.hpp"
 #include"macros.h"
