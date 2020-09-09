@@ -1,8 +1,12 @@
 {
     ".deps_version": 2,
     "g++ -g -o ./tp ./cmm.o": {
-        "cmm.o": "input-78c5c18134d3abbd29285937a33d2a22",
-        "tp": "input-042436b8dfa93a9427d932cb7ebf9f48"
+        "cmm.o": "input-18603b2c1f45196061a22703c17e77d0",
+        "tp": "input-ef3f4c5fff461db9cec1ea2588ecb8a3"
+    },
+    "g++ -g -o ./tp ./main.o": {
+        "main.o": "input-ceb8f12c80b1e2e69ac2fc32dc8e6c28",
+        "tp": "input-bfc9938509d09adb6b58f36b44f62fc5"
     },
     "g++ -o ./tp ./cmm.o": {
         "cmm.o": "input-f0a7b38d9c1a2ca162d0cc5626dd814e",
@@ -15,8 +19,18 @@
     },
     "g++ -std=c++11 -g -O0 -c ./cmm.cpp -o ./cmm.o": {
         ".": "input-5058f1af8388633f609cadb75a75dc9d",
-        "cmm.cpp": "input-f75a780fa28ef139bd25e1834363ce76",
-        "cmm.o": "input-78c5c18134d3abbd29285937a33d2a22"
+        "cmm.cpp": "input-a69caae126b8d46af5954de766a5445d",
+        "cmm.o": "input-8de69040782b193c81535bdb600050bc"
+    },
+    "g++ -std=c++11 -g -O0 -c ./eg.cpp -o ./eg.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d",
+        "eg.cpp": "input-7b821ae9b65c28178dce82b76394acff",
+        "eg.o": "input-366d668f2f3a854d71b222c8b497661c"
+    },
+    "g++ -std=c++11 -g -O0 -c ./main.cpp -o ./main.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d",
+        "main.cpp": "input-7b290ad848e0d30a8b2d5d7c01a90b65",
+        "main.o": "input-ceb8f12c80b1e2e69ac2fc32dc8e6c28"
     },
     "g++ -std=c++11 -g -O2 -c ./cmm.cpp -o ./cmm.o": {
         ".": "input-5058f1af8388633f609cadb75a75dc9d",
