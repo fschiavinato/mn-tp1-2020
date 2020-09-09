@@ -17,7 +17,7 @@ class matrix {
         matrix(int rows, int cols);
 
         //Para inicializar pasandole una matriz
-        matrix(const vector<vector<double>>&);
+        matrix(const vector<vector<double>>& m);
 
         //Devuelve un elemento de la matriz
         double operator()(int row, int col) const;
