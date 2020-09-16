@@ -7,5 +7,5 @@ using namespace std;
 #define forsn(i,s,n) for(int i=int(s);i<int(n);i++)
 #define dforsn(i,s,n) for(int i=int(n)-1;i>=int(s);i--)
 
-#define debug(x) cerr << __LINE__  << ") " << #x << " = " << x << endl
-#define RAYA cerr << "===============================" << endl
+#define debug(x) clog << __LINE__  << ") " << #x << " = " << x << endl
+#define RAYA clog << "===============================" << endl
