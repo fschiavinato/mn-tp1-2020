@@ -2,10 +2,11 @@
 #include"tipos/vector.h"
 #include"tipos/racional.h"
 #include"tipos/matriz.h"
+#include"tipos/partido.h"
 #include"eg.hpp"
 
 template<class F>
-vect<F> cmmWrapper(vector<partido>& partidos, int T){
+vect<F> cmm(vect<partido>& partidos, int T){
     vect<F> w(T), l(T);
     matriz<F> n(T, T);
     for(int i = 0; i < partidos.size(); i++) {
