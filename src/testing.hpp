@@ -7,28 +7,31 @@
 #include "tipos/vector.h"
 #include "tipos/partido.h"
 #include <fstream>
-using namespace std;
 
-typedef vect<etype>(*ranking)(vect<partido>&, int);
 
-#ifndef TESTING
 int main(int argc, char *argv[]) {
     ifstream fin(argv[1]);
     ofstream fout(argv[2]);
     int method = stoi(argv[3]);
     int T, P;
-    fin >> T >> P;
+    fin >> T;
     vect<etype> w(T), l(T);
     matriz<etype> n(T, T);
     vect<partido> partidos(P);
     forn(i, P) fin >> partidos[i];
+
     vect<etype> r;
-    vector<ranking> rankings = {cmm<etype>, wp<etype>, elo<etype>};
-    r = rankings[method](partidos, T);
+    switch(method) {
+        case 0:
+            r = cmm<etype>(partidos, T);
+            break;
+        case 1:
+            r = wp<etype>(partidos, T);
+            break;
+        case 2:
+            r = elo<etype>(partidos, T);
+            break;
+    }
     fout << r << endl;
     return 0;
 }
-#else
-#include"testing.hpp"
-#endif
-

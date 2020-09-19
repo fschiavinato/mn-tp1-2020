@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include"tipos/vector.h"
 using namespace std;
 
 #define etype long double

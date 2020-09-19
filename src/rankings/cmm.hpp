@@ -1,9 +1,8 @@
 #pragma once
 #include"tipos/vector.h"
-#include"tipos/racional.h"
 #include"tipos/matriz.h"
 #include"tipos/partido.h"
-#include"eg.hpp"
+#include"solvers/eg.hpp"
 
 template<class F>
 vect<F> cmm(vect<partido>& partidos, int T){

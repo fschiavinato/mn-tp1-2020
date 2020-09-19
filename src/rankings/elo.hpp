@@ -1,44 +1,43 @@
 #pragma once
 #include"tipos/vector.h"
-#include"tipos/racional.h"
 #include"tipos/partido.h"
 #include"tipos/matriz.h"
-#include"eg.hpp"
+#include"solvers/eg.hpp"
 #include <math.h>
 #define CONSTANT_Q_ELO 0.0057565
 
-double gFunction(double rd){
+etype gFunction(etype rd){
     return 1/sqrt(1+3*pow(CONSTANT_Q_ELO,2)*pow(rd,2)/pow(M_PI,2));
 }
 
-double EFunction(double rdj, double diffElo, double g){
+etype EFunction(etype rdj, etype diffElo, etype g){
     return 1/(1+pow(10, -g*diffElo/400));
 }
 
-double dFunction(double g, double E){
+etype dFunction(etype g, etype E){
     return pow(pow(CONSTANT_Q_ELO,2)*pow(g,2)*E*(1-E), -1);
 }
 
-double calcNewRD(double rd, double d){
+etype calcNewRD(etype rd, etype d){
     return sqrt(pow(1/pow(rd,2)+1/d, -1));
 }
 
-pair<double,double> newRatingAndRD(double r1, double r2, double rs1, double rs2, int g1, int g2){
-    double outcome = g1 > g2 ? 1 : (g1 == g2 ? 1/2 : 0);
+pair<etype,etype> newRatingAndRD(etype r1, etype r2, etype rs1, etype rs2, int g1, int g2){
+    etype outcome = g1 > g2 ? 1 : (g1 == g2 ? 1/2 : 0);
 
-    double g = gFunction(rs2);
-    double E = EFunction(rs2, r1-r2, g);
-    double d = dFunction(g, E);
+    etype g = gFunction(rs2);
+    etype E = EFunction(rs2, r1-r2, g);
+    etype d = dFunction(g, E);
 
-    double newRating = r1 + CONSTANT_Q_ELO/(1/pow(r1,2) + 1/d)*g*(outcome-E);
-    double newRD = 30;//calcNewRD(rs1, d);
+    etype newRating = r1 + CONSTANT_Q_ELO/(1/pow(r1,2) + 1/d)*g*(outcome-E);
+    etype newRD = 30;//calcNewRD(rs1, d);
     return make_pair(newRating, newRD);
 }
 
 template<class F>
-vect<F> elo(vector<partido>& partidos, int T) {
-    vect<double>ratings(T, 1500);
-    vect<double>RDS(T, 350);
+vect<F> elo(vect<partido>& partidos, int T) {
+    vect<etype>ratings(T, 1500);
+    vect<etype>RDS(T, 350);
 
     for(int i = 0; i < partidos.size(); i++){
         auto r1 = ratings[partidos[i].equipo1-1];

@@ -1,6 +1,5 @@
 #pragma once
 #include"tipos/vector.h"
-#include"tipos/racional.h"
 #include"tipos/matriz.h"
 
 template<class F>

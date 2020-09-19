@@ -1,22 +1,40 @@
 import numpy as np
+import sympy as sp
 import pandas as pd 
 import re
 import os
 import subprocess
+TESTS_DIR = '../tests'
+BIN = '../tp'
 
-def main(file_path):
-    file = open(file_path)
+
+# DECORATORS
+
+def save(f):
+
+    def _f(ipath, opath):
+        res = f(ipath)
+        with open(opath, 'w') as file:
+            file.write('\n'.join(str(value) for value in res))
+    _f.no_save = f
+    return _f
+
+
+# ALGORITHMS
+
+@save
+def reference(ipath):
+    file = open(ipath)
     T, P = map(int, file.readline().split(' '))
     c = 2*np.eye(int(T))
     res = np.array(T)
-
     b = [1 for _ in range(T)]
     for line in file:
         e1, g1, e2, g2 = map(int, line.split()[1:5])
-        c[e1-1][e2-1] -= 1
-        c[e2-1][e1-1] -= 1
-        c[e1-1][e1-1] += 1
-        c[e2-1][e2-1] += 1
+        c[e1-1, e2-1] -= 1
+        c[e2-1, e1-1] -= 1
+        c[e1-1, e1-1] += 1
+        c[e2-1, e2-1] += 1
         if g1 > g2:
             b[e1-1] += 0.5
             b[e2-1] -= 0.5
@@ -25,10 +43,19 @@ def main(file_path):
             b[e1-1] -= 0.5
     return np.linalg.solve(c, b)
 
-TESTS_DIR = '../tests'
-BIN = '../tp'
+def own(ipath, opath):
+    subprocess.run([BIN, ipath, opath, '0'])
+
+# API
+
+def run_cached(ipath, opath, f, cached):
+    if opath not in cached: 
+        print(f'generating {opath}')
+        f(ipath, opath)
+    with open(opath) as res:
+        return [float(line.strip()) for line in res if len(line.strip())>0]
+
 def results():
-    
     test_files = [os.path.join(root, name)
              for root, dirs, files in os.walk(TESTS_DIR)
              for name in files
@@ -40,20 +67,9 @@ def results():
         test_in = f'{test}.in'
         test_out = f'{test}.out'
         test_expected = f'{test}.expected'
-        if f'{test}.out' not in test_files:
-            print(f'generating {test}.out')
-            subprocess.run([BIN, test_in, test_out, '0'])
-        if f'{test}.expected' not in test_files:
-            print(f'generating {test}.expected')
-            r_ref[test] = main(test_in)
-            with open(test_expected, 'w') as expected_file:
-                expected_file.write('\n'.join(str(value) for value in r_ref[test]))
-        with open(test_out) as res:
-                r[test] = [float(line.strip()) for line in res if len(line.strip())>0]
-        with open(test_expected) as res:
-                r_ref[test] = [float(line.strip()) for line in res if len(line.strip())>0]
+        r[test] = run_cached(test_in, test_out, own, test_files)
+        r_ref[test] = run_cached(test_in, test_expected, reference, test_files)
     return r, r_ref
-
 
 def test_generator(name, victorias):
     matches = []
