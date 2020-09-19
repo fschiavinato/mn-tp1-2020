@@ -1,3 +1,4 @@
 src/tp
 *.o
 .vscode/
+src/tests

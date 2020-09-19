@@ -5,8 +5,8 @@
         "tp": "input-ef3f4c5fff461db9cec1ea2588ecb8a3"
     },
     "g++ -g -o ./tp ./main.o": {
-        "main.o": "input-592578cc90443931fafec68ddc9f16d3",
-        "tp": "output-9e6cc53cc257307c83f394009f4e4052"
+        "main.o": "input-0ff67322287ce0387183c8bdc9de6f6a",
+        "tp": "input-3b6e55146e766a5dcc518639c757492e"
     },
     "g++ -o ./tp ./cmm.o": {
         "cmm.o": "input-f0a7b38d9c1a2ca162d0cc5626dd814e",
@@ -28,8 +28,9 @@
         "eg.o": "input-366d668f2f3a854d71b222c8b497661c"
     },
     "g++ -std=c++11 -g -O0 -c ./main.cpp -o ./main.o": {
-        "main.o": "output-592578cc90443931fafec68ddc9f16d3",
-        "tests/prueba1.in": "input-333ffd87cdd8c1fd53d8d33c64b5150c"
+        ".": "input-5058f1af8388633f609cadb75a75dc9d",
+        "main.cpp": "input-508bedb6518dae1d455fa556dd7b1d71",
+        "main.o": "input-0ff67322287ce0387183c8bdc9de6f6a"
     },
     "g++ -std=c++11 -g -O2 -c ./cmm.cpp -o ./cmm.o": {
         ".": "input-5058f1af8388633f609cadb75a75dc9d",
