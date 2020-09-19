@@ -1,6 +1,7 @@
 #include <iostream>
 #include "cmm.hpp"
 #include "elo.hpp"
+#include "wp.hpp"
 #include "macros.h"
 #include "tipos/matriz.h"
 #include "tipos/vector.h"
@@ -25,6 +26,9 @@ int main(int argc, char *argv[]) {
             r = cmm<double>(partidos, T);
             break;
         case 1:
+            r = wp<double>(partidos, T);
+            break;
+        case 2:
             r = elo<double>(partidos, T);
             break;
     }
