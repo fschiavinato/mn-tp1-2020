@@ -15,21 +15,21 @@ int main(int argc, char *argv[]) {
     int method = stoi(argv[3]);
     int T, P;
     fin >> T >> P;
-    vect<double> w(T), l(T);
-    matriz<double> n(T, T);
+    vect<etype> w(T), l(T);
+    matriz<etype> n(T, T);
     vect<partido> partidos(P);
     forn(i, P) fin >> partidos[i];
 
-    vect<double> r;
+    vect<etype> r;
     switch(method) {
         case 0:
-            r = cmm<double>(partidos, T);
+            r = cmm<etype>(partidos, T);
             break;
         case 1:
-            r = wp<double>(partidos, T);
+            r = wp<etype>(partidos, T);
             break;
         case 2:
-            r = elo<double>(partidos, T);
+            r = elo<etype>(partidos, T);
             break;
     }
     fout << r << endl;

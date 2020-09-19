@@ -2,6 +2,7 @@
 #include<iostream>
 using namespace std;
 
+#define etype long double
 #define forn(i,n) for(int i=0;i<int(n);i++)
 #define dforn(i,n) for(int i=int(n)-1;i>=0;i--)
 #define forsn(i,s,n) for(int i=int(s);i<int(n);i++)

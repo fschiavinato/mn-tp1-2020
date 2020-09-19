@@ -57,19 +57,17 @@ def results():
 
 def test_generator(name, victorias):
     matches = []
+    T = len(victorias)
     for i, row in enumerate(victorias):
         for j, aij in enumerate(row):
             matches += aij*((i, j),)
-    test_generator_matches(name, matches)
+    test_generator_matches(name, matches, T)
     
 
-def test_generator_matches(name, matches):
-    T = 0
+def test_generator_matches(name, matches, T):
     matches_output = []
     for (i, j) in matches:
         matches_output += [f'1 {i+1} 1 {j+1} 0']
-        T = max(i, T)
-    T += 1
     P = len(matches)
     file_path = f'{TESTS_DIR}/{name}.in'
     dir_path = os.path.dirname(file_path)
@@ -80,10 +78,10 @@ def test_generator_matches(name, matches):
     with open(file_path, 'w') as file:
         file.write('\n'.join([f'{T} {P}', *matches_output]))
     try:
-        os.remove(f'{file_path}.out')
+        os.remove(f'{TESTS_DIR}/{name}.out')
     except:
         pass
     try:
-        os.remove(f'{file_path}.expected')
+        os.remove(f'{TESTS_DIR}/{name}.expected')
     except:
         pass
