@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     vect<partido> partidos(P);
     forn(i, P) fin >> partidos[i];
     vect<etype> r;
-    vector<ranking> rankings = {cmm<etype>, wp<etype>, elo<etype>};
+    vector<ranking> rankings = {cmmWithEg<etype>, wp<etype>, elo<etype>, cmmWithCholesky<etype>};
     r = rankings[method](partidos, T);
     fout << r << endl;
     return 0;

@@ -11,6 +11,8 @@ class matriz {
             this->entradas = new T*[n];
             forn(i, n) {
                 this->entradas[i] = new T[m];
+                
+                forn(j, n) entradas[i][j] = 0;
             }
         }
 

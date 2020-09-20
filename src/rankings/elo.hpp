@@ -4,10 +4,11 @@
 #include"../tipos/matriz.h"
 #include"../solvers/eg.hpp"
 #include <math.h>
+#define PI 3.14159265358979323846
 #define CONSTANT_Q_ELO 0.0057565
 
 etype gFunction(etype rd){
-    return 1/sqrt(1+3*pow(CONSTANT_Q_ELO,2)*pow(rd,2)/pow(M_PI,2));
+    return 1/sqrt(1+3*pow(CONSTANT_Q_ELO,2)*pow(rd,2)/pow(PI,2));
 }
 
 etype EFunction(etype rdj, etype diffElo, etype g){

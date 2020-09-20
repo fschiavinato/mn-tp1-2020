@@ -1,10 +1,17 @@
 #pragma once
 #include"../tipos/vector.h"
 #include"../tipos/matriz.h"
+#include <math.h>
 
+/**
+  * Resolución de sistema Ax=b mediante la descomposición de Cholesky 
+  * la cual es A = L*L^t y luego resolvemos L*y=b y luego L^t*x=y.
+  * SOLO APLICABLE SI LA MATRIZ DE ENTRADA ES SIMETRICA DEF POSITIVA.
+  */
 template<class F>
-vect<F> eg(matriz<F>& C, vect <F>& b, const int T) {
+vect<F> cholesky(matriz<F>& C, vect <F>& b, const int T) {
     vect<F> x(T);
+    vect<F> y(T);
 
     forn(j, T) {
         
@@ -21,18 +28,18 @@ vect<F> eg(matriz<F>& C, vect <F>& b, const int T) {
         }
     }
 
-    //resuelvo L * y = b
-    dforn(i, T) {
-        x[i] = b[i];
-        dforsn(j, i+1, T) {
-            x[i] -= C[i][j] * x[j];
+    //resuelvo L * y = b con forward sustitution
+    forn(i, T) {
+        y[i] = b[i];
+        forn(j, i) {
+            y[i] -= C[i][j] * y[j];
         }
-        x[i] = x[i] / C[i][i];
+        y[i] = y[i] / C[i][i];
     }
 
-    //resuelvo L^t * x = b MAL
+    //resuelvo L^t * x = y con backward sustitution
     dforn(i, T) {
-        x[i] = b[i];
+        x[i] = y[i];
         dforsn(j, i+1, T) {
             x[i] -= C[i][j] * x[j];
         }
