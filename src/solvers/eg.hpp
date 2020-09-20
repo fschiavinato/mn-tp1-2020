@@ -1,6 +1,6 @@
 #pragma once
-#include"tipos/vector.h"
-#include"tipos/matriz.h"
+#include"../tipos/vector.h"
+#include"../tipos/matriz.h"
 
 template<class F>
 vect<F> eg(matriz<F>& C, vect <F>& b, const int T) {

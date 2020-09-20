@@ -1,8 +1,8 @@
 #pragma once
-#include"tipos/vector.h"
-#include"tipos/partido.h"
-#include"tipos/matriz.h"
-#include"solvers/eg.hpp"
+#include"../tipos/vector.h"
+#include"../tipos/partido.h"
+#include"../tipos/matriz.h"
+#include"../solvers/eg.hpp"
 #include <math.h>
 #define CONSTANT_Q_ELO 0.0057565
 
@@ -29,8 +29,9 @@ pair<etype,etype> newRatingAndRD(etype r1, etype r2, etype rs1, etype rs2, int g
     etype E = EFunction(rs2, r1-r2, g);
     etype d = dFunction(g, E);
 
-    etype newRating = r1 + CONSTANT_Q_ELO/(1/pow(r1,2) + 1/d)*g*(outcome-E);
-    etype newRD = 30;//calcNewRD(rs1, d);
+    etype outcomeMinusExpected = outcome-E;
+    etype newRating = r1 + CONSTANT_Q_ELO/(1/pow(rs1,2) + 1/d)*g*outcomeMinusExpected;
+    etype newRD = calcNewRD(rs1, d);
     return make_pair(newRating, newRD);
 }
 
