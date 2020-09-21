@@ -5,11 +5,12 @@
 
 /**
   * Resolución de sistema Ax=b mediante la descomposición de Cholesky 
-  * la cual es A = L*L^t y luego resolvemos L*y=b y luego L^t*x=y.
-  * SOLO APLICABLE SI LA MATRIZ DE ENTRADA ES SIMETRICA DEF POSITIVA.
+  * con matrices dispersa (sparse matrix).
+  * http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.146.1200&rep=rep1&type=pdf
+  * https://github.com/scijs/cholesky-solve
   */
 template<class F>
-vect<F> cholesky(matriz<F>& C, vect <F>& b, const int T) {
+vect<F> cholesky(vect<F>& C, vect <F>& b, const int T) {
     vect<F> x(T);
     vect<F> y(T);
     cout << C << endl;
