@@ -1,2 +1,2 @@
-debug:
-	g++ -std=c++11 -g -DTESTING -I. -O2 -c ./main.cpp -o ./tp
+test:
+	g++ -std=c++11 -g -DNO_MATCHES -I. -O2 ./main.cpp -o ./tp

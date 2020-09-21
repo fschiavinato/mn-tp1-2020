@@ -11,7 +11,7 @@ using namespace std;
 
 typedef vect<etype>(*ranking)(vect<partido>&, int);
 
-#ifndef TESTING
+#ifndef NO_MATCHES
 int main(int argc, char *argv[]) {
     ifstream fin(argv[1]);
     ofstream fout(argv[2]);
@@ -25,10 +25,10 @@ int main(int argc, char *argv[]) {
     vect<etype> r;
     vector<ranking> rankings = {cmmWithEg<etype>, wp<etype>, elo<etype>, cmmWithCholesky<etype>};
     r = rankings[method](partidos, T);
-    fout << r << endl;
+    fout << r;
     return 0;
 }
 #else
-#include"testing.hpp"
+#include"no_matches.hpp"
 #endif
 
