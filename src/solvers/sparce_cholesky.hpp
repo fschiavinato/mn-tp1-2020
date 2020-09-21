@@ -6,11 +6,13 @@
 /**
   * Resolución de sistema Ax=b mediante la descomposición de Cholesky 
   * con matrices dispersa (sparse matrix).
+  * Utilizamos un vector de tuplas donde el primer valor es la fila,
+  * el segundo la columna y el tercero el valor en la matriz.
   * http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.146.1200&rep=rep1&type=pdf
   * https://github.com/scijs/cholesky-solve
   */
 template<class F>
-vect<F> cholesky(vect<F>& C, vect <F>& b, const int T) {
+vect<F> cholesky(vect<tuple<F,F,F>>& C, vect <F>& b, const int T) {
     vect<F> x(T);
     vect<F> y(T);
     cout << C << endl;
