@@ -1,7 +1,7 @@
 #pragma once
-#include"tipos/vector.h"
-#include"tipos/matriz.h"
-#include"tipos/partido.h"
+#include"../tipos/vector.h"
+#include"../tipos/matriz.h"
+#include"../tipos/partido.h"
 
 template<class F>
 vect<F> wp(vect<partido>& partidos, int T){
@@ -18,7 +18,8 @@ vect<F> wp(vect<partido>& partidos, int T){
         }
     }
     for(int i = 0; i < T; i++) {
-    	r[i] = w[i] / p[i];
+        if(p[i] != 0)
+    	    r[i] = w[i] / p[i];
     }
     return r;
 }

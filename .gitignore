@@ -2,3 +2,4 @@ src/tp
 *.o
 .vscode/
 src/tests
+__pycache__/
