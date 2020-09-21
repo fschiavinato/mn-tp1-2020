@@ -8,30 +8,26 @@
 #include "tipos/partido.h"
 #include <fstream>
 
+typedef vect<etype>(*ranking)(vect<partido>&, int);
 
 int main(int argc, char *argv[]) {
     ifstream fin(argv[1]);
     ofstream fout(argv[2]);
     int method = stoi(argv[3]);
-    int T, P;
+    int T;
     fin >> T;
     vect<etype> w(T), l(T);
     matriz<etype> n(T, T);
-    vect<partido> partidos(P);
-    forn(i, P) fin >> partidos[i];
-
-    vect<etype> r;
-    switch(method) {
-        case 0:
-            r = cmm<etype>(partidos, T);
-            break;
-        case 1:
-            r = wp<etype>(partidos, T);
-            break;
-        case 2:
-            r = elo<etype>(partidos, T);
-            break;
+    forn(i, T) forn(j, T) { 
+        fin >> n[i][j];
+        w[i] += n[i][j];
+        l[j] += n[i][j];
     }
-    fout << r << endl;
+    forn(i, T) forsn(j, i, T) { 
+        n[i][j] += n[j][i];
+        n[j][i] = n[i][j]; 
+    }
+    vect<etype> r = cmm<etype>(w, l, n, T);
+    fout << r;
     return 0;
 }

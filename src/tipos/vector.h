@@ -17,7 +17,7 @@ class vect: public std::vector<T> {
             forn(i, A.size()) {
                 out << A[i] << (i < A.size()-1? ", ": "");
             }
-            out << "]";
+            out << "]" << endl;
         } else {
             forn(i, A.size()) {
                 out << A[i] << endl;
