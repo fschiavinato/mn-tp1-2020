@@ -43,8 +43,10 @@ def reference(ipath):
             b[e1-1] -= 0.5
     return np.linalg.solve(c, b)
 
-def own(ipath, opath):
-    subprocess.run([BIN, ipath, opath, '0'])
+def own(method):
+    def _own(ipath, opath):
+        subprocess.run([BIN, ipath, opath, str(method), "1>", f"{opath}.log"])
+    return _own
 
 @save
 def reference_no_matches(ipath):
@@ -72,7 +74,7 @@ def run_cached(ipath, opath, f, cached):
     with open(opath) as res:
         return [float(line.strip()) for line in res if len(line.strip())>0]
 
-def results(with_matches=True):
+def results(with_matches=True, method=0):
     test_files = [os.path.join(root, name)
              for root, dirs, files in os.walk(TESTS_DIR)
              for name in files
@@ -84,7 +86,7 @@ def results(with_matches=True):
         test_in = f'{test}.in'
         test_out = f'{test}.out'
         test_expected = f'{test}.expected'
-        r[test] = run_cached(test_in, test_out, own, test_files)
+        r[test] = run_cached(test_in, test_out, own(method), test_files)
         if with_matches:
             r_ref[test] = run_cached(test_in, test_expected, reference, test_files)
         else:

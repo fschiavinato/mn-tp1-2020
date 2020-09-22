@@ -42,16 +42,16 @@ vect<F> elo(vect<partido>& partidos, int T) {
     vect<etype>RDS(T, 350);
 
     for(int i = 0; i < partidos.size(); i++){
-        auto r1 = ratings[partidos[i].equipo1-1];
-        auto r2 = ratings[partidos[i].equipo2-1];
-        auto rs1 = RDS[partidos[i].equipo1-1];
-        auto rs2 = RDS[partidos[i].equipo2-1];
+        auto r1 = ratings[partidos[i].equipo1];
+        auto r2 = ratings[partidos[i].equipo2];
+        auto rs1 = RDS[partidos[i].equipo1];
+        auto rs2 = RDS[partidos[i].equipo2];
         auto z1 = newRatingAndRD(r1,r2,rs1,rs2,partidos[i].goles1,partidos[i].goles2);
         auto z2 = newRatingAndRD(r2,r1,rs2,rs1,partidos[i].goles2,partidos[i].goles1);
-        ratings[partidos[i].equipo1-1] = z1.first;
-        ratings[partidos[i].equipo2-1] = z2.first;
-        RDS[partidos[i].equipo1-1] = z1.second;
-        RDS[partidos[i].equipo2-1] = z2.second;
+        ratings[partidos[i].equipo1] = z1.first;
+        ratings[partidos[i].equipo2] = z2.first;
+        RDS[partidos[i].equipo1] = z1.second;
+        RDS[partidos[i].equipo2] = z2.second;
     }
 
     return ratings;
