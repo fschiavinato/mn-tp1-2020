@@ -45,14 +45,14 @@ int main(int argc, char *argv[]) {
     } 
     vect<etype> r;
 
-    auto start = std::chrono::steady_clock::now();
+    //auto start = std::chrono::steady_clock::now();
     
     vector<ranking> rankings = {cmmWithEg<etype>, wp<etype>, elo<etype>, cmmWithCholesky<etype>};
 
-    auto end = std::chrono::steady_clock::now();
-    std::chrono::duration<double> elapsed_seconds = end-start;
-    ofstream timeFile(string(argv[2])+".log");
-    timeFile << elapsed_seconds.count();
+    //auto end = std::chrono::steady_clock::now();
+    //std::chrono::duration<double> elapsed_seconds = end-start;
+    //ofstream timeFile(string(argv[2])+".log");
+    //timeFile << elapsed_seconds.count();
 
     r = rankings[method](partidos, T);
     fout << r;
