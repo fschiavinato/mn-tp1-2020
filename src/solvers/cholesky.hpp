@@ -12,8 +12,6 @@ template<class F>
 vect<F> cholesky(matriz<F>& C, vect <F>& b, const int T) {
     vect<F> x(T);
     vect<F> y(T);
-    cout << C << endl;
-    cout << b << endl;
     forn(j, T) {
         
         F sum = 0;
@@ -30,10 +28,6 @@ vect<F> cholesky(matriz<F>& C, vect <F>& b, const int T) {
             C[i][j] = (C[i][j]-sum2)/C[j][j];
         }
     }
-    //Lo igualamos del otro lado para poder hacer ambas sustituciones sin cambios
-    forn(i,T)
-        forn(j,T)
-           if(j > i) C[i][j] = C[j][i];
 
     //resuelvo L * y = b con forward sustitution
     forn(i, T) {
@@ -43,13 +37,12 @@ vect<F> cholesky(matriz<F>& C, vect <F>& b, const int T) {
         }
         y[i] = y[i] / C[i][i];
     }
-    cout << y << endl;
 
     //resuelvo L^t * x = y con backward sustitution
     dforn(i, T) {
         x[i] = y[i];
         dforsn(j, i+1, T) {
-            x[i] -= C[i][j] * x[j];
+            x[i] -= C[j][i] * x[j];
         }
         x[i] = x[i] / C[i][i];
     }
