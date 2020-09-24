@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/src/tp",
-            "args": ["src/tests/test1.in", "/dev/stdout", "2"],
+            "args": ["tests/atp_matches_2015.dat", "/dev/stdout", "2"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],

@@ -2,8 +2,9 @@
 #include "rankings/cmm.hpp"
 #include "rankings/wp.hpp"
 #include "rankings/elo.hpp"
-#include "solvers/cholesky_disperso.hpp"
-#include "solvers/cholesky.hpp"
+#include "solvers/cholesky_esparsa.hpp"
+#include "solvers/cholesky_esparsa_rapida.hpp"
+#include "solvers/cholesky_semi_esparsa.hpp"
 #include "macros.h"
 #include "tipos/matriz.h"
 #include "tipos/vector.h"
@@ -16,11 +17,8 @@ using namespace std;
 
 typedef vect<etype>(*ranking)(vect<partido>&, int);
 
-#ifndef NO_MATCHES
 int main(int argc, char *argv[]) {
     ifstream fin(argv[1]);
-    ofstream fout(argv[2]);
-    int method = stoi(argv[3]);
     int T, P;
     fin >> T >> P;
     map<int,int> mapaIdentificadores;
@@ -48,13 +46,17 @@ int main(int argc, char *argv[]) {
     } 
     vect<etype> r;
     
-    vector<ranking> rankings = {cmmWithEg<etype>, wp<etype>, elo<etype>, cmmWithCholesky<etype>, cmmConCholeskyDisperso<etype>};
-    r = rankings[method](partidos, T);
-
-    fout << setprecision(14) << r;
+    vector<ranking> rankings = {cmmWithEg<etype>, wp<etype>, elo<etype>, cmmWithCholesky<etype>, cmmConCholeskyDisperso<etype>, cmmConCholeskySemiDisperso<etype>, cmmConCholeskyDispersoRapido<etype>};
+    
+    for(int i = 0; i < rankings.size(); i++){
+        auto start = std::chrono::steady_clock::now();
+        
+        r = rankings[i](partidos, T);
+        
+        auto end = chrono::steady_clock::now();
+        chrono::duration<double> elapsed_seconds = end-start;
+        cout << elapsed_seconds.count() << endl;
+    }
+    
     return 0;
 }
-#else
-#include"no_matches.hpp"
-#endif
-

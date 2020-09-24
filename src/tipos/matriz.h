@@ -18,9 +18,9 @@ class matriz {
 
         ~matriz() {
             forn(i, n) {
-                delete this->entradas[i];
+                delete[] this->entradas[i];
             }
-            delete this->entradas;
+            delete[] this->entradas;
         }
 
         T* const operator[](int i) {

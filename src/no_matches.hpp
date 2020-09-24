@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
         n[i][j] += n[j][i];
         n[j][i] = n[i][j]; 
     }
-    vect<etype> r = cmm<etype>(w, l, n, T);
+    vect<etype> r = cmm<etype>(w, l, n, T, false);
     fout << r;
     return 0;
 }

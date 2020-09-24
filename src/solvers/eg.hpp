@@ -19,7 +19,6 @@ vect<F> eg(matriz<F>& C, vect <F>& b, const int T) {
             b[k] -= b[i] * alpha;
         }
     }
-    
     //resuelvo con backward sustitution
     dforn(i, T) {
         x[i] = b[i];
