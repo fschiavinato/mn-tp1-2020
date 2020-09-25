@@ -23,5 +23,5 @@ Para ejecutar el programa con algún achivo de entrada, hacer:
 	-3 Colley con Cholesky
 	-4 Cholesky para matrices dispersas
 Para comparar el ránking obtenido por un determinado jugador entre distintos métodos:
-	ejecutar compare.py y pasarle los parámetros de los archivos de salida con los rankings calculados
+	ejecutar compare.py y pasarle como parámetros las rutas los archivos de salida con los rankings calculados
 	y el número del jugador o equipo que se quiere analizar
